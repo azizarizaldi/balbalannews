@@ -151,7 +151,7 @@ function showTeam(data) {
                           <img src="${team.crestUrl}" class="card-img-top" style="height: 17.5rem;" alt="${team.name}">
                           <div class="card-body">
                             <p class="h6">${team.name}</p>
-                            <a href="./team.html?id=${team.ID}">More Info</a>
+                            <a href="./team.html?id=${team.id}">More Info</a>
                           </div>
                         </div>
                       </div>
@@ -176,11 +176,11 @@ function getTeamById() {
             let teamHTML = `
                   <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                      <img src="${data.teams.crestUrl}" />
+                      <img src="${data.crestUrl}" />
                     </div>
                     <div class="card-content">
-                      <span class="card-title">${data.teams.name}</span>
-                      ${snarkdown(data.teams.address)}
+                      <span class="card-title">${data.name}</span>
+                      ${snarkdown(data.address)}
                     </div>
                   </div>
                 `;
@@ -197,16 +197,15 @@ function getTeamById() {
       .then(status)
       .then(json)
       .then(function (data) {
-        console.log(data);
         // Menyusun komponen card artikel secara dinamis
         let teamHTML = `
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                  <img src="${data.teams.crestUrl}" />
+                  <img src="${data.crestUrl}" />
                 </div>
                 <div class="card-content">
-                  <span class="card-title">${data.teams.name}</span>
-                  ${snarkdown(data.teams.address)}
+                  <span class="card-title">${data.name}</span>
+                  ${snarkdown(data.address)}
                 </div>
               </div>
             `;
@@ -264,4 +263,9 @@ function getSavedTeamById() {
     // Sisipkan komponen card ke dalam elemen dengan id #content
     document.getElementById("body-content").innerHTML = teamHTML;
   });
+}
+
+// Blok kode untuk memparsing json menjadi array JavaScript
+function json(response) {
+  return response.json();
 }
